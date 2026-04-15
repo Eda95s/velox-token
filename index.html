@@ -5,62 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VELOX | DePIN & VPN Ecosystem</title>
     <style>
-        body {
-            background-color: #050505;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+        body, html {
+            margin: 0; padding: 0; height: 100%; overflow: hidden;
+            background-color: #0a0b0d; font-family: 'Segoe UI', sans-serif; color: white;
+        }
+        #blockchain-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+        }
+        .content-wrapper {
+            position: relative; z-index: 10; display: flex;
+            justify-content: center; align-items: center; height: 100%; text-align: center;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 20px;
+            max-width: 800px; padding: 40px;
+            background: rgba(10, 11, 13, 0.8);
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #fff; font-size: 3.5rem; margin-bottom: 10px; }
         .highlight { color: #00ff9d; }
-        .desc { font-size: 1.2rem; margin-bottom: 40px; color: #aaa; }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px; }
         .card {
-            background: #111;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #333;
+            background: rgba(28, 31, 38, 0.6); padding: 15px;
+            border-radius: 12px; border: 1px solid #333;
         }
-        h3 { color: #fff; }
-        footer { margin-top: 80px; font-size: 0.9rem; color: #666; }
+        h1 { font-size: 3rem; margin: 0; }
+        p { color: rgba(255,255,255,0.6); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>VELOX <span class="highlight">DePIN</span></h1>
-        <p class="desc">Empowering the decentralized network through Kaspa KRC-20.</p>
+    <canvas id="blockchain-canvas"></canvas>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Mining</h3>
-                <p>Share your bandwidth & earn $VELOX tokens effortlessly.</p>
-            </div>
-            <div class="card">
-                <h3>VPN</h3>
-                <p>Secure, high-speed decentralized connectivity for everyone.</p>
-            </div>
-            <div class="card">
-                <h3>Wallet</h3>
-                <p>Full control over your rewards via VELOX Wallet.</p>
+    <div class="content-wrapper">
+        <div class="container">
+            <h1>VELOX <span class="highlight">DePIN</span></h1>
+            <p>Empowering the decentralized network through Kaspa KRC-20.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Mining</h3>
+                    <p>Share bandwidth & earn $VELOX.</p>
+                </div>
+                <div class="card">
+                    <h3>VPN</h3>
+                    <p>Secure decentralized connectivity.</p>
+                </div>
+                <div class="card">
+                    <h3>Wallet</h3>
+                    <p>Manage rewards in VELOX Wallet.</p>
+                </div>
             </div>
         </div>
-
-        <footer>
-            <p>&copy; 2026 VELOX Project. Built on Kaspa Network.</p>
-        </footer>
     </div>
+
+    <script>
+        const canvas = document.getElementById('blockchain-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff9d';
+            ctx.strokeStyle = 'rgba(0, 255, 157, 0.15)';
+            
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.sqrt((p.x - p2.x)**2 + (p.y - p2.y)**2);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+    </script>
 </body>
 </html>
