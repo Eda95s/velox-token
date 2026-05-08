@@ -36,7 +36,6 @@
         h1 { font-size: 3.5rem; margin: 10px 0; letter-spacing: 2px; }
         p { color: rgba(255,255,255,0.7); font-size: 1.1rem; }
 
-        /* Кнопки */
         .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; }
         .btn {
             padding: 12px 25px; border-radius: 50px; font-weight: bold;
@@ -52,20 +51,17 @@
         .btn-primary { background: #00ff9d; color: #0a0b0d; }
         .btn i { margin-right: 10px; }
 
-        /* Аирдроп */
         .airdrop-box {
             margin-top: 40px; padding: 30px;
             background: linear-gradient(135deg, rgba(0, 255, 157, 0.1), rgba(0, 136, 204, 0.1));
             border-radius: 20px; border: 2px dashed #00ff9d;
         }
 
-        /* Proof Section */
         .proof-img {
             width: 100%; max-width: 700px; border-radius: 15px; margin-top: 15px;
             border: 1px solid rgba(0, 255, 157, 0.3); box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
         }
 
-        /* Live Status Area */
         .live-status {
             display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; flex-wrap: wrap;
         }
@@ -76,7 +72,6 @@
         }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Footer */
         footer {
             width: 100%; max-width: 900px; margin-top: 20px;
             padding: 30px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
@@ -99,9 +94,9 @@
     <div class="content-wrapper">
         <div class="container">
             <div class="live-status">
-                <div class="status-node"><span class="pulse"></span> NETWORK: STABLE</div>
+                <div class="status-node"><span class="pulse"></span> NETWORK: ACTIVE</div>
+                <div class="status-node"><i class="fas fa-server"></i> NODES: <span id="node-count">124</span></div>
                 <div class="status-node"><i class="fas fa-microchip"></i> LOAD: <span id="load-val">1.8</span>%</div>
-                <div class="status-node"><i class="fas fa-network-wired"></i> TRAFFIC: <span id="traffic-val">0.9</span> GB/s</div>
             </div>
 
             <h1>VELOX <span class="highlight">DePIN</span></h1>
@@ -113,6 +108,9 @@
                 </a>
                 <a href="https://t.me/VeloxKRC20" target="_blank" class="btn">
                     <i class="fab fa-telegram-plane"></i> Community
+                </a>
+                <a href="https://x.com/VELOXDePin" target="_blank" class="btn">
+                    <i class="fab fa-x-twitter"></i> Follow X
                 </a>
                 <a href="https://drive.google.com/file/d/1msGGmIynzt_061qspn3K7sXuDUhImnlL/view" target="_blank" class="btn">
                     <i class="fas fa-file-alt"></i> Whitepaper
@@ -172,7 +170,6 @@
     </div>
 
     <script>
-        // Анимация фона (Blockchain Nodes)
         const canvas = document.getElementById('blockchain-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -214,10 +211,9 @@
             requestAnimationFrame(draw);
         }
 
-        // Динамические показатели (Креатив)
         setInterval(() => {
-            document.getElementById('load-val').innerText = (Math.random() * (3.8 - 1.1) + 1.1).toFixed(1);
-            document.getElementById('traffic-val').innerText = (Math.random() * (2.1 - 0.4) + 0.4).toFixed(1);
+            document.getElementById('load-val').innerText = (Math.random() * (3.5 - 1.1) + 1.1).toFixed(1);
+            document.getElementById('node-count').innerText = Math.floor(Math.random() * (130 - 120) + 120);
         }, 4000);
 
         window.addEventListener('resize', init);
