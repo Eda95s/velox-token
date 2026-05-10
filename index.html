@@ -57,24 +57,25 @@
             border-radius: 20px; border: 2px dashed #00ff9d;
         }
 
-        /* Вставь это в <style> внутри index.html */
-.swap-section {
-    margin-top: 40px;
+       .swap-section {
+    margin-top: 30px; /* Уменьшили отступ сверху */
+    margin-bottom: 0px; /* Убрали отступ снизу */
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow: hidden; /* Убирает лишние полосы прокрутки */
 }
 
 .swap-iframe {
     border: none;
     width: 100%;
-    max-width: 400px; /* Чуть больше ширины виджета для запаса */
-    height: 520px;    /* Фиксированная высота, чтобы не было бегунка */
-    border-radius: 20px;
+    max-width: 400px;
+    height: 460px; /* Уменьшили высоту фрейма, чтобы он не "толкал" нижний блок */
     background: transparent;
 }
 
+.proof-box {
+    margin-top: 10px !important; /* Принудительно подтягиваем MVP Alpha выше */
+}
         .proof-img {
             width: 100%; max-width: 700px; border-radius: 15px; margin-top: 15px;
             border: 1px solid rgba(0, 255, 157, 0.3); box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
