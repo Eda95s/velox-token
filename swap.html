@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>VELOX DePIN Swap Widget</title>
+    <style>
+        :root {
+            --cyan-accent: #00f2ff;
+            --dark-bg: #0d1117;
+            --card-bg: #161b22;
+            --text-white: #f0f6fc;
+        }
+
+        .velox-swap-widget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 24px;
+            width: 380px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+        }
+
+        .swap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .swap-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--cyan-accent);
+        }
+
+        .input-group {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-bottom: 4px;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-row input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 60%;
+            outline: none;
+        }
+
+        .token-selector {
+            background: #21262d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .swap-arrow {
+            text-align: center;
+            margin: -15px 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        .swap-arrow-btn {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            color: var(--cyan-accent);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .swap-arrow-btn:hover {
+            transform: rotate(180deg);
+            background: #21262d;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin: 16px 0;
+        }
+
+        .connect-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #00f2ff, #0072ff);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+        }
+
+        .status-tag {
+            font-size: 0.7rem;
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--cyan-accent);
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+    </style>
+
+    <div class="velox-swap-widget">
+        <div class="swap-header">
+            <h2>VELOX Swap</h2>
+            <span class="status-tag">KRC-20 Live</span>
+        </div>
+
+        <div class="input-group">
+            <label>Вы отдаете</label>
+            <div class="input-row">
+                <input type="number" id="pay-amount" placeholder="0.0">
+                <div class="token-selector">
+                    <span>KAS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="swap-arrow">
+            <button class="swap-arrow-btn">↓</button>
+        </div>
+
+        <div class="input-group">
+            <label>Вы получаете</label>
+            <div class="input-row">
+                <input type="number" id="receive-amount" placeholder="0.0" readonly>
+                <div class="token-selector">
+                    <span style="color: var(--cyan-accent);">VELOX</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <span>Курс:</span>
+            <span id="rate-display">1 KAS ≈ 100 VELOX</span>
+        </div>
+
+        <button class="connect-btn" id="swap-action-btn">Подключить кошелек</button>
+    </div>
+
+    <script>
+        (function() {
+            const RATE = 100; 
+            const payInput = document.getElementById('pay-amount');
+            const receiveInput = document.getElementById('receive-amount');
+            const btn = document.getElementById('swap-action-btn');
+
+            payInput.addEventListener('input', function() {
+                if (this.value > 0) {
+                    receiveInput.value = (this.value * RATE).toFixed(2);
+                } else {
+                    receiveInput.value = '';
+                }
+            });
+
+            btn.addEventListener('click', function() {
+                // Здесь будет вызов KasWare Wallet API
+                console.log('Connecting to KasWare...');
+                alert('Инициализация KasWare Wallet... Скрипт готов к приему транзакции.');
+            });
+        })();
+    </script>
+</body>
+</html>
