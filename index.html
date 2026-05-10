@@ -63,7 +63,6 @@
             border-radius: 20px; border: 2px dashed var(--green-accent);
         }
 
-        /* --- СТИЛИ ВИДЖЕТА SWAP --- */
         .velox-swap-container {
             margin-top: 40px;
             display: flex;
@@ -114,7 +113,6 @@
             border-radius: 12px; padding: 14px; color: #0a0b0d;
             font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.2s; margin-top: 15px;
         }
-        /* --- КОНЕЦ СТИЛЕЙ SWAP --- */
 
         .proof-img {
             width: 100%; max-width: 700px; border-radius: 15px; margin-top: 15px;
@@ -212,7 +210,7 @@
                     </div>
 
                     <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); margin: 15px 0;">
-                        <span>Курс:</span><span>1 KAS ≈ 100 VELOX</span>
+                        <span>Курс:</span><span id="live-rate-display">Загрузка...</span>
                     </div>
 
                     <button class="connect-btn" id="wallet-btn">Подключить кошелек</button>
@@ -314,16 +312,44 @@
         window.addEventListener('resize', init);
         init(); draw();
 
-        // --- ЛОГИКА SWAP И КОШЕЛЬКА ---
+        // --- ОБНОВЛЕННАЯ ЛОГИКА КУРСА С KASPACOM ---
         const payInput = document.getElementById('pay-amount');
         const receiveInput = document.getElementById('receive-amount');
         const walletBtn = document.getElementById('wallet-btn');
         const balanceDisplay = document.getElementById('kas-balance');
-        const rate = 100;
+        const rateDisplay = document.getElementById('live-rate-display');
+        
+        let currentRate = 166.67; // Дефолтный курс (1 / 0.006)
+
+        async function updateLiveRate() {
+            try {
+                // Пытаемся забрать курс VELOX/KAS из API KaspaCom
+                const response = await fetch('https://api.kaspacom.com/tokens/VELOX');
+                const data = await response.json();
+                const floorPrice = data.floor_price || 0.006; 
+                
+                // Рассчитываем сколько VELOX даем за 1 KAS
+                currentRate = (1 / floorPrice).toFixed(2);
+                rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
+                
+                // Если в инпуте что-то есть, пересчитываем сразу
+                if (payInput.value) {
+                    receiveInput.value = (parseFloat(payInput.value) * currentRate).toFixed(2);
+                }
+            } catch (e) {
+                // Резервный вариант, если API упало
+                rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
+                console.error("Курс KaspaCom временно недоступен");
+            }
+        }
 
         payInput.addEventListener('input', () => {
-            receiveInput.value = payInput.value ? (parseFloat(payInput.value) * rate).toFixed(2) : '';
+            receiveInput.value = payInput.value ? (parseFloat(payInput.value) * currentRate).toFixed(2) : '';
         });
+
+        // Обновляем курс раз в минуту
+        updateLiveRate();
+        setInterval(updateLiveRate, 60000);
 
         async function connectWallet() {
             const provider = window.kasware || (window.okxwallet && window.okxwallet.kaspa);
