@@ -3,141 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        :root {
-            --green-accent: #00ff9d; 
-            --dark-bg: #0d1117;
-            --card-bg: #161b22;
-        }
+    :root {
+        --green-accent: #00ff9d; 
+        --dark-bg: #0d1117;
+        --card-bg: #161b22;
+    }
 
-        body {
-            margin: 0;
-            padding: 10px; /* Небольшой отступ, чтобы тени не обрезались */
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            overflow: hidden; /* КРИТИЧНО: убирает бегунок внутри iframe */
-        }
+    body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
 
-        .velox-swap-widget {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--card-bg);
-            border: 1px solid rgba(0, 255, 157, 0.2);
-            border-radius: 16px;
-            padding: 20px;
-            width: 350px; /* Компактная ширина */
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-            box-sizing: border-box;
-            color: white;
-        }
+    /* Убираем стандартные стрелочки ввода (Chrome, Safari, Edge, Opera) */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-        .swap-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+    /* Убираем стрелочки для Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 
-        .swap-header h2 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: var(--green-accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .velox-swap-widget {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: var(--card-bg);
+        border: 1px solid rgba(0, 255, 157, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        width: 350px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        box-sizing: border-box;
+        color: white;
+    }
 
-        .input-group {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 5px;
-        }
+    .swap-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
 
-        .input-group label {
-            display: block;
-            font-size: 0.75rem;
-            color: #8b949e;
-            margin-bottom: 4px;
-        }
+    .swap-header h2 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--green-accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 
-        .input-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .input-group {
+        background: rgba(0, 0, 0, 0.4); /* Чуть темнее для контраста */
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 5px;
+    }
 
-        .input-row input {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
-            width: 60%;
-            outline: none;
-        }
+    .input-group label {
+        display: block;
+        font-size: 0.75rem;
+        color: #8b949e;
+        margin-bottom: 4px;
+    }
 
-        .token-selector {
-            background: #21262d;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border: 1px solid #30363d;
-        }
+    .input-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .swap-arrow {
-            text-align: center;
-            margin: -12px 0;
-            position: relative;
-            z-index: 2;
-        }
+    .input-row input {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.4rem;
+        width: 60%;
+        outline: none;
+    }
 
-        .swap-arrow-btn {
-            background: #161b22;
-            border: 1px solid var(--green-accent);
-            color: var(--green-accent);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
-        }
+    .token-selector {
+        background: #21262d;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        border: 1px solid #30363d;
+        color: #f0f6fc;
+    }
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #8b949e;
-            margin: 12px 0;
-        }
+    .swap-arrow {
+        text-align: center;
+        margin: -14px 0;
+        position: relative;
+        z-index: 2;
+    }
 
-        .connect-btn {
-            width: 100%;
-            background: var(--green-accent);
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            color: #0a0b0d;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
-        }
+    .swap-arrow-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--green-accent);
+        color: var(--green-accent);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .connect-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 255, 157, 0.5);
-        }
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: #8b949e;
+        margin: 15px 0;
+    }
 
-        .status-tag {
-            font-size: 0.65rem;
-            background: rgba(0, 255, 157, 0.1);
-            color: var(--green-accent);
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 255, 157, 0.2);
-        }
-    </style>
+    .connect-btn {
+        width: 100%;
+        background: var(--green-accent);
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        color: #0a0b0d;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 4px 15px rgba(0, 255, 157, 0.3);
+    }
+
+    .status-tag {
+        font-size: 0.65rem;
+        background: rgba(0, 255, 157, 0.1);
+        color: var(--green-accent);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
+</style>
 </head>
 <body>
     <div class="velox-swap-widget">
