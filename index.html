@@ -58,8 +58,8 @@
         }
 
        .swap-section {
-    margin-top: 30px; /* Уменьшили отступ сверху */
-    margin-bottom: 0px; /* Убрали отступ снизу */
+    margin-top: 20px;
+    margin-bottom: -10px; /* Отрицательный отступ, чтобы убрать дыру */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -69,12 +69,14 @@
     border: none;
     width: 100%;
     max-width: 400px;
-    height: 460px; /* Уменьшили высоту фрейма, чтобы он не "толкал" нижний блок */
+    height: 420px; /* Уменьшили высоту до минимума */
     background: transparent;
+    overflow: hidden;
 }
 
 .proof-box {
-    margin-top: 10px !important; /* Принудительно подтягиваем MVP Alpha выше */
+    margin-top: 0px !important;
+    padding-top: 0px !important;
 }
         .proof-img {
             width: 100%; max-width: 700px; border-radius: 15px; margin-top: 15px;
