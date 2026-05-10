@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,7 +5,8 @@
     <title>VELOX DePIN Swap Widget</title>
     <style>
         :root {
-            --cyan-accent: #00f2ff;
+            /* Заменили циановый на твой зеленый */
+            --green-accent: #00ff9d; 
             --dark-bg: #0d1117;
             --card-bg: #161b22;
             --text-white: #f0f6fc;
@@ -18,9 +18,12 @@
             border: 1px solid #30363d;
             border-radius: 16px;
             padding: 24px;
-            width: 380px;
+            /* Уменьшили ширину, чтобы влезало */
+            width: 360px; 
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            margin: 20px auto;
+            /* Убрали автоматический margin, чтобы лучше контролировать положение */
+            margin: 0 auto; 
+            box-sizing: border-box;
         }
 
         .swap-header {
@@ -33,7 +36,7 @@
         .swap-header h2 {
             margin: 0;
             font-size: 1.2rem;
-            color: var(--cyan-accent);
+            color: var(--green-accent); /* Зеленый заголовок */
         }
 
         .input-group {
@@ -87,7 +90,8 @@
         .swap-arrow-btn {
             background: var(--card-bg);
             border: 1px solid #30363d;
-            color: var(--cyan-accent);
+            /* Стрелочка теперь тоже зеленая */
+            color: var(--green-accent); 
             border-radius: 50%;
             width: 32px;
             height: 32px;
@@ -110,33 +114,37 @@
 
         .connect-btn {
             width: 100%;
-            background: linear-gradient(90deg, #00f2ff, #0072ff);
+            /* Градиент теперь из твоего зеленого в более темный оттенок */
+            background: linear-gradient(90deg, #00ff9d, #00b36e);
             border: none;
             border-radius: 12px;
             padding: 14px;
-            color: white;
+            color: #0a0b0d; /* Черный текст на кнопке, так лучше читается */
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            /* Свечение теперь зеленое */
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
         }
 
         .connect-btn:hover {
             opacity: 0.9;
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.5);
         }
 
         .status-tag {
             font-size: 0.7rem;
-            background: rgba(0, 242, 255, 0.1);
-            color: var(--cyan-accent);
+            /* Фон тега теперь зеленый */
+            background: rgba(0, 255, 157, 0.1); 
+            color: var(--green-accent);
             padding: 2px 8px;
             border-radius: 4px;
             text-transform: uppercase;
         }
     </style>
-
+</head>
+<body style="margin: 0; padding: 0; background: transparent;">
     <div class="velox-swap-widget">
         <div class="swap-header">
             <h2>VELOX Swap</h2>
@@ -162,7 +170,7 @@
             <div class="input-row">
                 <input type="number" id="receive-amount" placeholder="0.0" readonly>
                 <div class="token-selector">
-                    <span style="color: var(--cyan-accent);">VELOX</span>
+                    <span style="color: var(--green-accent);">VELOX</span>
                 </div>
             </div>
         </div>
@@ -177,6 +185,7 @@
 
     <script>
         (function() {
+            // Заглушка курса
             const RATE = 100; 
             const payInput = document.getElementById('pay-amount');
             const receiveInput = document.getElementById('receive-amount');
