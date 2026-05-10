@@ -126,51 +126,67 @@
     </div>
 
     <script>
-        const payInput = document.getElementById('pay-amount');
-        const receiveInput = document.getElementById('receive-amount');
-        const walletBtn = document.getElementById('wallet-btn');
-        const balanceDisplay = document.getElementById('kas-balance');
-        const rate = 100;
+    const payInput = document.getElementById('pay-amount');
+    const receiveInput = document.getElementById('receive-amount');
+    const walletBtn = document.getElementById('wallet-btn');
+    const balanceDisplay = document.getElementById('kas-balance');
+    const rate = 100;
 
-        // Калькулятор
-        payInput.addEventListener('input', () => {
-            receiveInput.value = payInput.value ? (parseFloat(payInput.value) * rate).toFixed(2) : '';
-        });
-        receiveInput.addEventListener('input', () => {
-            payInput.value = receiveInput.value ? (parseFloat(receiveInput.value) / rate).toFixed(2) : '';
-        });
+    // Калькулятор
+    payInput.addEventListener('input', () => {
+        receiveInput.value = payInput.value ? (parseFloat(payInput.value) * rate).toFixed(2) : '';
+    });
+    receiveInput.addEventListener('input', () => {
+        payInput.value = receiveInput.value ? (parseFloat(receiveInput.value) / rate).toFixed(2) : '';
+    });
 
-        // Работа с кошельком
-        async function connectWallet() {
-            const provider = window.kasware || (window.okxwallet && window.okxwallet.kaspa);
-            
-            if (provider) {
-                try {
-                    walletBtn.innerText = 'Подключение...';
-                    const accounts = await provider.requestAccounts();
-                    if (accounts && accounts.length > 0) {
-                        const addr = accounts[0];
-                        walletBtn.innerText = addr.substring(0, 9) + '...' + addr.slice(-4);
-                        
-                        // ЗАПРОС БАЛАНСА
-                        const balanceData = await provider.getBalance();
-                        // Баланс в Kaspa обычно делится на 100,000,000 (сомо в 1 каспу)
-                        const totalKas = (balanceData.total / 100000000).toFixed(2);
-                        balanceDisplay.innerText = `Баланс: ${totalKas} KAS`;
-                        
-                        walletBtn.style.background = 'rgba(0, 255, 157, 0.1)';
-                        walletBtn.style.color = 'var(--green-accent)';
-                    }
-                } catch (e) {
-                    walletBtn.innerText = 'Ошибка';
-                    console.error(e);
-                }
-            } else {
-                alert('Установите KasWare или OKX Wallet');
-            }
+    // Функция получения баланса
+    async function updateBalance(provider) {
+        try {
+            const balanceData = await provider.getBalance();
+            // Делим на 10^8 (стандарт Kaspa для перевода из сомми в KAS)
+            const totalKas = (balanceData.total / 100000000).toFixed(2);
+            balanceDisplay.innerText = `Баланс: ${totalKas} KAS`;
+        } catch (e) {
+            console.error("Ошибка при получении баланса:", e);
         }
+    }
 
-        walletBtn.addEventListener('click', connectWallet);
-    </script>
+    // Работа с кошельком
+    async function connectWallet() {
+        // Проверяем наличие провайдеров
+        const provider = window.kasware || (window.okxwallet && window.okxwallet.kaspa);
+        
+        if (provider) {
+            try {
+                walletBtn.innerText = 'Ожидание...';
+                // Запрашиваем доступ к аккаунту
+                const accounts = await provider.requestAccounts();
+                
+                if (accounts && accounts.length > 0) {
+                    const addr = accounts[0];
+                    // Красивое отображение адреса
+                    walletBtn.innerText = addr.substring(0, 9) + '...' + addr.slice(-4);
+                    walletBtn.style.background = 'rgba(0, 255, 157, 0.1)';
+                    walletBtn.style.color = '#00ff9d';
+                    walletBtn.style.border = '1px solid #00ff9d';
+                    
+                    // Сразу обновляем баланс
+                    await updateBalance(provider);
+                }
+            } catch (e) {
+                walletBtn.innerText = 'Отказ';
+                console.error("Ошибка подключения:", e);
+                setTimeout(() => { walletBtn.innerText = 'Подключить кошелек'; }, 2000);
+            }
+        } else {
+            // Если кошелька нет, выводим то самое окно
+            alert('Кошелек не обнаружен. Пожалуйста, установите KasWare Wallet или OKX Wallet и обновите страницу.');
+            window.open('https://www.kasware.info/', '_blank');
+        }
+    }
+
+    walletBtn.addEventListener('click', connectWallet);
+</script>
 </body>
 </html>
