@@ -57,21 +57,23 @@
             border-radius: 20px; border: 2px dashed #00ff9d;
         }
 
-        /* Стиль для контейнера обменника */
-        .swap-section {
-            margin-top: 40px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        .swap-iframe {
-            border: none;
-            width: 100%;
-            max-width: 420px;
-            height: 540px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+        /* Вставь это в <style> внутри index.html */
+.swap-section {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Убирает лишние полосы прокрутки */
+}
+
+.swap-iframe {
+    border: none;
+    width: 100%;
+    max-width: 400px; /* Чуть больше ширины виджета для запаса */
+    height: 520px;    /* Фиксированная высота, чтобы не было бегунка */
+    border-radius: 20px;
+    background: transparent;
+}
 
         .proof-img {
             width: 100%; max-width: 700px; border-radius: 15px; margin-top: 15px;
