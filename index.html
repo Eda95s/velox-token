@@ -174,7 +174,7 @@
 
         /* Статус бар */
         .live-status {
-            display: flex; justify-content: center; gap: 25px; margin-bottom: 40px;
+            display: flex; justify-content: center; align-items: center; gap: 25px; margin-bottom: 40px;
             background: rgba(255,255,255,0.03); padding: 10px 20px; border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.05); width: fit-content; margin-left: auto; margin-right: auto;
         }
@@ -185,6 +185,14 @@
             border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--green-accent);
             animation: blink 2s infinite;
         }
+
+        /* Кнопка переключения языка */
+        .lang-switch {
+            background: transparent; border: 1px solid var(--green-accent); color: var(--green-accent);
+            padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; cursor: pointer;
+            font-weight: bold; text-transform: uppercase; transition: 0.3s;
+        }
+        .lang-switch:hover { background: var(--green-accent); color: black; }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
@@ -203,6 +211,7 @@
             h1 { font-size: 2.5rem; }
             .container { padding: 30px 20px; }
             .coin-wrapper .veloksik-coin { width: 140px; height: 140px; }
+            .live-status { flex-wrap: wrap; gap: 15px; border-radius: 20px; }
         }
     </style>
 </head>
@@ -213,25 +222,26 @@
         <div class="container">
             <div class="live-status">
                 <div class="status-node"><span class="pulse"></span> NET: <span class="val">ACTIVE</span></div>
-                <div class="status-node"><i class="fas fa-server"></i> NODES: <span class="val" id="node-count">124</span></div>
-                <div class="status-node"><i class="fas fa-microchip"></i> LOAD: <span class="val" id="load-val">1.8</span>%</div>
+                <div class="status-node"><i class="fas fa-server"></i> <span id="txt-nodes">NODES</span>: <span class="val" id="node-count">124</span></div>
+                <div class="status-node"><i class="fas fa-microchip"></i> <span id="txt-load">LOAD</span>: <span class="val" id="load-val">1.8</span>%</div>
+                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">RU</button>
             </div>
 
             <h1>VELOX <span class="highlight">DePIN</span></h1>
-            <p class="hero-desc">The first decentralized VPN infrastructure powered by the high-speed Kaspa KRC-20 network. Secure, private, and community-driven.</p>
+            <p class="hero-desc" id="txt-hero-desc">The first decentralized VPN infrastructure powered by the high-speed Kaspa KRC-20 network. Secure, private, and community-driven.</p>
 
             <div class="btn-group">
                 <a href="https://kaspa.com/tokens/marketplace/token/VELOX" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-bolt"></i> Trade $VELOX
+                    <i class="fas fa-bolt"></i> <span id="txt-trade">Trade $VELOX</span>
                 </a>
                 <a href="https://t.me/VeloxKRC20" target="_blank" class="btn">
-                    <i class="fab fa-telegram-plane"></i> Community
+                    <i class="fab fa-telegram-plane"></i> <span id="txt-community">Community</span>
                 </a>
                 <a href="https://x.com/VELOXDePin" target="_blank" class="btn">
-                    <i class="fab fa-x-twitter"></i> Follow X
+                    <i class="fab fa-x-twitter"></i> <span id="txt-follow">Follow X</span>
                 </a>
                 <a href="https://drive.google.com/file/d/1msGGmIynzt_061qspn3K7sXuDUhImnlL/view" target="_blank" class="btn">
-                    <i class="fas fa-file-invoice"></i> Whitepaper
+                    <i class="fas fa-file-invoice"></i> <span id="txt-whitepaper">Whitepaper</span>
                 </a>
             </div>
 
@@ -242,12 +252,12 @@
             </a>
 
             <div class="veloksik-story">
-                <h3 class="highlight">The Legend of VELOKSIK 🏎️</h3>
-                <p style="font-style: italic; opacity: 0.8;">"Пока другие блоки только подтверждаются, Велоксик уже на финише."</p>
-                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);">
-                    Велоксик — это официальный талисман и мем-коин DePIN-экосистемы VELOX. Рожденный на стыке молниеносной сети Kaspa и гибкости TON, он символизирует будущее децентрализованной передачи данных. Пока основной проект VELOX строит VPN-инфраструктуру, Велоксик объединяет комьюнити, заряжая его энергией скорости и свободы. 
+                <h3 class="highlight" id="txt-story-title">The Legend of VELOKSIK 🏎️</h3>
+                <p style="font-style: italic; opacity: 0.8;" id="txt-story-quote">"While other blocks are only being confirmed, Veloksik is already at the finish line."</p>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="txt-story-body">
+                    Veloksik is the official mascot and meme coin of the VELOX DePIN ecosystem. Born at the junction of lightning-fast Kaspa and TON's flexibility, it symbolizes the future of decentralized data transfer. While VELOX builds the VPN infrastructure, Veloksik unites the community with the energy of speed and freedom.
                     <br><br>
-                    <b>Статус:</b> Заряжен энергией Kaspa. Готов покорять TON. Не просто мем, а легенда в процессе создания.
+                    <b>Status:</b> Charged by Kaspa. Ready to conquer TON. More than a meme — a legend in the making.
                 </p>
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
                     <span style="font-size: 0.8rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 136, 204, 0.3);">#TON_POWER</span>
@@ -256,33 +266,33 @@
             </div>
 
             <div class="marketing-hub">
-                <div class="partner-badge">🔥 LIMITED OFFER</div>
-                <h2 style="margin-top: 0; color: white;"><i class="fas fa-bullhorn" style="margin-right: 10px; color: var(--green-accent);"></i> Привлеки Маркетинг</h2>
-                <p style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px;">
-                    Мы ищем мощных шиллеров и маркетологов! Помоги нашему каналу расти и забирай <b>10% вознаграждения</b> за каждого привлеченного инвестора + бонусы в <b>$VELOKSIK</b>.
+                <div class="partner-badge" id="txt-offer">🔥 LIMITED OFFER</div>
+                <h2 style="margin-top: 0; color: white;"><i class="fas fa-bullhorn" style="margin-right: 10px; color: var(--green-accent);"></i> <span id="txt-market-title">Apply for Marketing</span></h2>
+                <p style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px;" id="txt-market-desc">
+                    We are looking for powerful shillers and marketers! Help our channel grow and get <b>10% reward</b> for every investor attracted + bonuses in <b>$VELOKSIK</b>.
                 </p>
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px;">
                     <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,255,157,0.2);">
                         <i class="fas fa-user-plus highlight"></i>
-                        <div style="font-weight: bold; margin-top: 10px;">10% Referral</div>
+                        <div style="font-weight: bold; margin-top: 10px;" id="txt-ref">10% Referral</div>
                     </div>
                     <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,255,157,0.2);">
                         <i class="fas fa-coins highlight"></i>
-                        <div style="font-weight: bold; margin-top: 10px;">Bonus Coins</div>
+                        <div style="font-weight: bold; margin-top: 10px;" id="txt-bonus">Bonus Coins</div>
                     </div>
                 </div>
 
                 <a href="https://t.me/VELOKSIK" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 20px; font-size: 1.1rem;">
-                    <i class="fas fa-rocket" style="margin-right: 12px;"></i> СТАТЬ ПАРТНЕРОМ И ЗАРАБОТАТЬ
+                    <i class="fas fa-rocket" style="margin-right: 12px;"></i> <span id="txt-partner-btn">BECOME A PARTNER AND EARN</span>
                 </a>
             </div>
 
             <div class="airdrop-box">
-                <h2 class="highlight" style="margin-top:0">🎁 AIRDROP WAVE #1 IS LIVE</h2>
-                <p>Don't miss your chance! We are distributing <b>5,000,000 $VELOX</b> to early supporters. Get "Early Node" status and boost your future rewards.</p>
+                <h2 class="highlight" style="margin-top:0" id="txt-airdrop-title">🎁 AIRDROP WAVE #1 IS LIVE</h2>
+                <p id="txt-airdrop-desc">Don't miss your chance! We are distributing <b>5,000,000 $VELOX</b> to early supporters. Get "Early Node" status and boost your future rewards.</p>
                 <a href="https://t.me/xVELOX_Chat/13" target="_blank" class="btn" style="background: white; color: black; border: none; margin-top: 15px; padding: 12px 40px;">
-                    Claim Your Tokens
+                    <span id="txt-claim">Claim Your Tokens</span>
                 </a>
             </div>
 
@@ -295,7 +305,7 @@
 
                     <div class="swap-input-group">
                         <div class="swap-label-row" style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 10px;">
-                            <span>Sell</span>
+                            <span id="txt-sell">Sell</span>
                             <span id="kas-balance">Balance: 0.00</span>
                         </div>
                         <div class="swap-input-row" style="display: flex; justify-content: space-between; align-items: center;">
@@ -308,7 +318,7 @@
 
                     <div class="swap-input-group" style="margin-top: 5px;">
                         <div class="swap-label-row" style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 10px;">
-                            <span>Receive</span>
+                            <span id="txt-receive">Receive</span>
                         </div>
                         <div class="swap-input-row" style="display: flex; justify-content: space-between; align-items: center;">
                             <input type="number" id="receive-amount" placeholder="0.0" readonly>
@@ -317,38 +327,38 @@
                     </div>
 
                     <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); margin: 20px 5px;">
-                        <span>Exchange Rate:</span>
+                        <span id="txt-rate">Exchange Rate:</span>
                         <span id="live-rate-display" style="color: white; font-weight: 500;">Fetching...</span>
                     </div>
 
                     <button class="btn btn-primary" id="wallet-btn" style="width: 100%; justify-content: center; padding: 16px; font-size: 1rem; border-radius: 16px;">
-                        Connect Wallet
+                        <span id="txt-connect">Connect Wallet</span>
                     </button>
                 </div>
             </div>
 
             <div class="proof-box">
                 <div style="display: inline-block; padding: 5px 15px; background: rgba(0,255,157,0.1); border-radius: 8px; color: var(--green-accent); font-size: 0.8rem; font-weight: bold; margin-bottom: 10px;">ALPHA RELEASE</div>
-                <h3 class="highlight" style="font-size: 2rem; margin: 0;">Working MVP Proof</h3>
-                <p style="color: var(--text-secondary)">Real-time bandwidth mining on Xray Core. Our node system is already operational on PC and Android.</p>
+                <h3 class="highlight" style="font-size: 2rem; margin: 0;" id="txt-mvp-title">Working MVP Proof</h3>
+                <p style="color: var(--text-secondary)" id="txt-mvp-desc">Real-time bandwidth mining on Xray Core. Our node system is already operational on PC and Android.</p>
                 <img src="proof.jpg" alt="VELOX Node Proof" class="proof-img">
             </div>
 
             <div class="grid">
                 <div class="card">
                     <i class="fas fa-microchip highlight"></i>
-                    <h3>Bandwidth Mining</h3>
-                    <p>Monetize your unused internet connection and earn $VELOX tokens automatically.</p>
+                    <h3 id="txt-card1-h">Bandwidth Mining</h3>
+                    <p id="txt-card1-p">Monetize your unused internet connection and earn $VELOX tokens automatically.</p>
                 </div>
                 <div class="card">
                     <i class="fas fa-shield-alt highlight"></i>
-                    <h3>Hyper-Privacy</h3>
-                    <p>Military-grade encryption with multi-hop community-powered routing nodes.</p>
+                    <h3 id="txt-card2-h">Hyper-Privacy</h3>
+                    <p id="txt-card2-p">Military-grade encryption with multi-hop community-powered routing nodes.</p>
                 </div>
                 <div class="card">
                     <i class="fas fa-coins highlight"></i>
-                    <h3>Kaspa Native</h3>
-                    <p>Leveraging KRC-20 for sub-second transaction speeds and ultra-low mining fees.</p>
+                    <h3 id="txt-card3-h">Kaspa Native</h3>
+                    <p id="txt-card3-p">Leveraging KRC-20 for sub-second transaction speeds and ultra-low mining fees.</p>
                 </div>
             </div>
         </div>
@@ -372,6 +382,79 @@
     </div>
 
     <script>
+        // --- TRANSLATION DATA ---
+        const translations = {
+            en: {
+                nodes: "NODES", load: "LOAD", heroDesc: "The first decentralized VPN infrastructure powered by the high-speed Kaspa KRC-20 network. Secure, private, and community-driven.",
+                trade: "Trade $VELOX", community: "Community", follow: "Follow X", whitepaper: "Whitepaper",
+                storyTitle: "The Legend of VELOKSIK 🏎️", storyQuote: '"While other blocks are only being confirmed, Veloksik is already at the finish line."',
+                storyBody: "Veloksik is the official mascot and meme coin of the VELOX DePIN ecosystem. Born at the junction of lightning-fast Kaspa and TON's flexibility, it symbolizes the future of decentralized data transfer. While VELOX builds the VPN infrastructure, Veloksik unites the community with the energy of speed and freedom. <br><br><b>Status:</b> Charged by Kaspa. Ready to conquer TON. More than a meme — a legend in the making.",
+                offer: "🔥 LIMITED OFFER", marketTitle: "Apply for Marketing", marketDesc: "We are looking for powerful shillers and marketers! Help our channel grow and get <b>10% reward</b> for every investor attracted + bonuses in <b>$VELOKSIK</b>.",
+                ref: "10% Referral", bonus: "Bonus Coins", partnerBtn: "BECOME A PARTNER AND EARN",
+                airdropTitle: "🎁 AIRDROP WAVE #1 IS LIVE", airdropDesc: "Don't miss your chance! We are distributing <b>5,000,000 $VELOX</b> to early supporters. Get 'Early Node' status and boost your future rewards.",
+                claim: "Claim Your Tokens", sell: "Sell", receive: "Receive", rate: "Exchange Rate:", connect: "Connect Wallet",
+                mvpTitle: "Working MVP Proof", mvpDesc: "Real-time bandwidth mining on Xray Core. Our node system is already operational on PC and Android.",
+                card1h: "Bandwidth Mining", card1p: "Monetize your unused internet connection and earn $VELOX tokens automatically.",
+                card2h: "Hyper-Privacy", card2p: "Military-grade encryption with multi-hop community-powered routing nodes.",
+                card3h: "Kaspa Native", card3p: "Leveraging KRC-20 for sub-second transaction speeds and ultra-low mining fees."
+            },
+            ru: {
+                nodes: "УЗЛЫ", load: "НАГРУЗКА", heroDesc: "Первая децентрализованная VPN-инфраструктура на базе высокоскоростной сети Kaspa KRC-20. Безопасно, приватно и под управлением сообщества.",
+                trade: "Торговать $VELOX", community: "Сообщество", follow: "Читать X", whitepaper: "Whitepaper",
+                storyTitle: "Легенда о ВЕЛОКСИКЕ 🏎️", storyQuote: '"Пока другие блоки только подтверждаются, Велоксик уже на финише."',
+                storyBody: "Велоксик — это официальный талисман и мем-коин DePIN-экосистемы VELOX. Рожденный на стыке молниеносной сети Kaspa и гибкости TON, он символизирует будущее децентрализованной передачи данных. Пока основной проект VELOX строит VPN-инфраструктуру, Велоксик объединяет комьюнити, заряжая его энергией скорости и свободы. <br><br><b>Статус:</b> Заряжен энергией Kaspa. Готов покорять TON. Не просто мем, а легенда в процессе создания.",
+                offer: "🔥 ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ", marketTitle: "Привлеки Маркетинг", marketDesc: "Мы ищем мощных шиллеров и маркетологов! Помоги нашему каналу расти и забирай <b>10% вознаграждения</b> за каждого привлеченного инвестора + бонусы в <b>$VELOKSIK</b>.",
+                ref: "10% Рефералка", bonus: "Бонусные коины", partnerBtn: "СТАТЬ ПАРТНЕРОМ И ЗАРАБОТАТЬ",
+                airdropTitle: "🎁 AIRDROP ВОЛНА #1 ЗАПУЩЕНА", airdropDesc: "Не упусти свой шанс! Мы распределяем <b>5,000,000 $VELOX</b> среди первых сторонников. Получи статус «Early Node» и увеличь награды.",
+                claim: "Забрать токены", sell: "Продать", receive: "Получить", rate: "Курс обмена:", connect: "Подключить кошелек",
+                mvpTitle: "Доказательство работы MVP", mvpDesc: "Майнинг пропускной способности в реальном времени на Xray Core. Наша система узлов уже работает на ПК и Android.",
+                card1h: "Майнинг трафика", card1p: "Монетизируйте неиспользуемое интернет-соединение и зарабатывайте токены $VELOX автоматически.",
+                card2h: "Гипер-приватность", card2p: "Шифрование военного уровня с многоузловой маршрутизацией через сообщество.",
+                card3h: "Родной для Kaspa", card3p: "Использование KRC-20 для мгновенных транзакций и сверхнизких комиссий за майнинг."
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            const langBtn = document.getElementById('lang-btn');
+            langBtn.innerText = currentLang === 'en' ? 'RU' : 'EN';
+            
+            const t = translations[currentLang];
+            document.getElementById('txt-nodes').innerText = t.nodes;
+            document.getElementById('txt-load').innerText = t.load;
+            document.getElementById('txt-hero-desc').innerText = t.heroDesc;
+            document.getElementById('txt-trade').innerText = t.trade;
+            document.getElementById('txt-community').innerText = t.community;
+            document.getElementById('txt-follow').innerText = t.follow;
+            document.getElementById('txt-whitepaper').innerText = t.whitepaper;
+            document.getElementById('txt-story-title').innerText = t.storyTitle;
+            document.getElementById('txt-story-quote').innerText = t.storyQuote;
+            document.getElementById('txt-story-body').innerHTML = t.storyBody;
+            document.getElementById('txt-offer').innerText = t.offer;
+            document.getElementById('txt-market-title').innerText = t.marketTitle;
+            document.getElementById('txt-market-desc').innerHTML = t.marketDesc;
+            document.getElementById('txt-ref').innerText = t.ref;
+            document.getElementById('txt-bonus').innerText = t.bonus;
+            document.getElementById('txt-partner-btn').innerText = t.partnerBtn;
+            document.getElementById('txt-airdrop-title').innerText = t.airdropTitle;
+            document.getElementById('txt-airdrop-desc').innerHTML = t.airdropDesc;
+            document.getElementById('txt-claim').innerText = t.claim;
+            document.getElementById('txt-sell').innerText = t.sell;
+            document.getElementById('txt-receive').innerText = t.receive;
+            document.getElementById('txt-rate').innerText = t.rate;
+            document.getElementById('txt-connect').innerText = t.connect;
+            document.getElementById('txt-mvp-title').innerText = t.mvpTitle;
+            document.getElementById('txt-mvp-desc').innerText = t.mvpDesc;
+            document.getElementById('txt-card1-h').innerText = t.card1h;
+            document.getElementById('txt-card1-p').innerText = t.card1p;
+            document.getElementById('txt-card2-h').innerText = t.card2h;
+            document.getElementById('txt-card2-p').innerText = t.card2p;
+            document.getElementById('txt-card3-h').innerText = t.card3h;
+            document.getElementById('txt-card3-p').innerText = t.card3p;
+        }
+
         // --- ANIMATION ENGINE ---
         const canvas = document.getElementById('blockchain-canvas');
         const ctx = canvas.getContext('2d');
