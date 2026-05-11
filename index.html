@@ -44,6 +44,37 @@
         h1 { font-size: 4rem; margin: 0; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
         .hero-desc { color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 20px auto 35px; }
 
+        /* VELOKSIK Styles */
+        .coin-wrapper {
+            margin: 40px auto 20px;
+            position: relative;
+            cursor: pointer;
+            width: fit-content;
+            transition: transform 0.3s ease;
+        }
+        .coin-wrapper:hover { transform: scale(1.05); }
+        
+        .veloksik-coin {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 157, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .veloksik-story {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border-left: 4px solid var(--green-accent);
+            text-align: left;
+        }
+
         /* Кнопки */
         .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
         .btn {
@@ -149,6 +180,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .container { padding: 30px 20px; }
+            .coin-wrapper .veloksik-coin { width: 140px; height: 140px; }
         }
     </style>
 </head>
@@ -179,6 +211,26 @@
                 <a href="https://drive.google.com/file/d/1msGGmIynzt_061qspn3K7sXuDUhImnlL/view" target="_blank" class="btn">
                     <i class="fas fa-file-invoice"></i> Whitepaper
                 </a>
+            </div>
+
+            <a href="https://t.me/VELOKSIK" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="coin-wrapper">
+                    <img src="veloksik-coin.png" alt="Veloksik Meme Coin" class="veloksik-coin">
+                </div>
+            </a>
+
+            <div class="veloksik-story">
+                <h3 class="highlight">The Legend of VELOKSIK 🏎️</h3>
+                <p style="font-style: italic; opacity: 0.8;">"Пока другие блоки только подтверждаются, Велоксик уже на финише."</p>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);">
+                    Велоксик — это официальный талисман и мем-коин DePIN-экосистемы VELOX. Рожденный на стыке молниеносной сети Kaspa и гибкости TON, он символизирует будущее децентрализованной передачи данных. Пока основной проект VELOX строит VPN-инфраструктуру, Велоксик объединяет комьюнити, заряжая его энергией скорости и свободы. 
+                    <br><br>
+                    <b>Статус:</b> Заряжен энергией Kaspa. Готов покорять TON. Не просто мем, а легенда в процессе создания.
+                </p>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <span style="font-size: 0.8rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 136, 204, 0.3);">#TON_POWER</span>
+                    <span style="font-size: 0.8rem; background: rgba(0, 255, 157, 0.1); color: var(--green-accent); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 255, 157, 0.3);">#KASPA_SPEED</span>
+                </div>
             </div>
 
             <div class="airdrop-box">
@@ -261,6 +313,7 @@
                 <a href="https://discord.gg/x3SgV8ch97" target="_blank"><i class="fab fa-discord"></i></a>
                 <a href="https://t.me/xVELOX_Chat" target="_blank"><i class="fas fa-comments"></i></a>
                 <a href="https://x.com/VELOXDePin" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://t.me/VELOKSIK" target="_blank"><i class="fas fa-rocket"></i></a>
             </div>
             
             <a href="mailto:veloxdepin@gmail.com" class="btn" style="border-radius: 50px;">
@@ -322,8 +375,10 @@
         }
 
         setInterval(() => {
-            document.getElementById('load-val').innerText = (Math.random() * (2.8 - 1.2) + 1.2).toFixed(1);
-            document.getElementById('node-count').innerText = Math.floor(Math.random() * (135 - 122) + 122);
+            const loadElem = document.getElementById('load-val');
+            const nodeElem = document.getElementById('node-count');
+            if(loadElem) loadElem.innerText = (Math.random() * (2.8 - 1.2) + 1.2).toFixed(1);
+            if(nodeElem) nodeElem.innerText = Math.floor(Math.random() * (135 - 122) + 122);
         }, 3500);
 
         window.addEventListener('resize', init);
@@ -344,18 +399,20 @@
                 const data = await response.json();
                 const floorPrice = data.floor_price || 0.006; 
                 currentRate = (1 / floorPrice).toFixed(2);
-                rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
-                if (payInput.value) {
+                if(rateDisplay) rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
+                if (payInput && payInput.value) {
                     receiveInput.value = (parseFloat(payInput.value) * currentRate).toFixed(2);
                 }
             } catch (e) {
-                rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
+                if(rateDisplay) rateDisplay.innerText = `1 KAS ≈ ${currentRate} VELOX`;
             }
         }
 
-        payInput.addEventListener('input', () => {
-            receiveInput.value = payInput.value ? (parseFloat(payInput.value) * currentRate).toFixed(2) : '';
-        });
+        if(payInput) {
+            payInput.addEventListener('input', () => {
+                receiveInput.value = payInput.value ? (parseFloat(payInput.value) * currentRate).toFixed(2) : '';
+            });
+        }
 
         updateLiveRate();
         setInterval(updateLiveRate, 60000);
@@ -375,7 +432,7 @@
                         
                         const balanceData = await provider.getBalance();
                         const totalKas = (balanceData.total / 100000000).toFixed(2);
-                        balanceDisplay.innerText = `Balance: ${totalKas} KAS`;
+                        if(balanceDisplay) balanceDisplay.innerText = `Balance: ${totalKas} KAS`;
                     }
                 } catch (e) {
                     walletBtn.innerText = 'Retry';
@@ -385,7 +442,7 @@
             }
         }
 
-        walletBtn.addEventListener('click', connectWallet);
+        if(walletBtn) walletBtn.addEventListener('click', connectWallet);
     </script>
 </body>
 </html>
