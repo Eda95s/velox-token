@@ -75,6 +75,34 @@
             text-align: left;
         }
 
+        /* MARKETING HUB STYLE */
+        .marketing-hub {
+            margin: 40px 0;
+            background: linear-gradient(145deg, rgba(0, 255, 157, 0.1), rgba(0, 136, 204, 0.1));
+            border: 2px solid var(--green-accent);
+            border-radius: 24px;
+            padding: 35px;
+            position: relative;
+            animation: glowPulse 3s infinite alternate;
+            text-align: left;
+        }
+        @keyframes glowPulse {
+            from { box-shadow: 0 0 15px rgba(0, 255, 157, 0.1); }
+            to { box-shadow: 0 0 35px rgba(0, 255, 157, 0.3); }
+        }
+        .partner-badge {
+            position: absolute;
+            top: -15px;
+            right: 25px;
+            background: #ff4757;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
         /* Кнопки */
         .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
         .btn {
@@ -99,12 +127,6 @@
             background: linear-gradient(135deg, rgba(0, 255, 157, 0.08) 0%, rgba(0, 136, 204, 0.08) 100%);
             border: 1px solid var(--green-accent); position: relative; overflow: hidden;
         }
-        .airdrop-box::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 157, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
         /* Swap Виджет */
         .velox-swap-container { margin-top: 50px; width: 100%; display: flex; justify-content: center; }
         .velox-swap-widget {
@@ -231,6 +253,29 @@
                     <span style="font-size: 0.8rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 136, 204, 0.3);">#TON_POWER</span>
                     <span style="font-size: 0.8rem; background: rgba(0, 255, 157, 0.1); color: var(--green-accent); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 255, 157, 0.3);">#KASPA_SPEED</span>
                 </div>
+            </div>
+
+            <div class="marketing-hub">
+                <div class="partner-badge">🔥 LIMITED OFFER</div>
+                <h2 style="margin-top: 0; color: white;"><i class="fas fa-bullhorn" style="margin-right: 10px; color: var(--green-accent);"></i> Привлеки Маркетинг</h2>
+                <p style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 25px;">
+                    Мы ищем мощных шиллеров и маркетологов! Помоги нашему каналу расти и забирай <b>10% вознаграждения</b> за каждого привлеченного инвестора + бонусы в <b>$VELOKSIK</b>.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                    <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,255,157,0.2);">
+                        <i class="fas fa-user-plus highlight"></i>
+                        <div style="font-weight: bold; margin-top: 10px;">10% Referral</div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(0,255,157,0.2);">
+                        <i class="fas fa-coins highlight"></i>
+                        <div style="font-weight: bold; margin-top: 10px;">Bonus Coins</div>
+                    </div>
+                </div>
+
+                <a href="https://t.me/VELOKSIK" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 20px; font-size: 1.1rem;">
+                    <i class="fas fa-rocket" style="margin-right: 12px;"></i> СТАТЬ ПАРТНЕРОМ И ЗАРАБОТАТЬ
+                </a>
             </div>
 
             <div class="airdrop-box">
