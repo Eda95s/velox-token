@@ -210,52 +210,54 @@
 <body>
     <canvas id="blockchain-canvas"></canvas>
 
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="live-status">
-                <div class="status-node"><span class="pulse"></span> NET: <span class="val">ACTIVE</span></div>
-                <div class="status-node"><i class="fas fa-server"></i> <span id="txt-nodes">NODES</span>: <span class="val" id="node-count">124</span></div>
-                <div class="status-node"><i class="fas fa-microchip"></i> <span id="txt-load">LOAD</span>: <span class="val" id="load-val">1.8</span>%</div>
-                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">RU</button>
+    <div class="coin-display-container" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
+    <div class="dual-coin-wrapper" style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+        <div class="coin-item" style="text-align: center;">
+            <div class="coin-wrapper" style="margin: 0;">
+                <img src="velox-icon.png" alt="VELOX Coin" class="veloksik-coin" style="filter: drop-shadow(0 0 30px rgba(0, 255, 157, 0.4));">
             </div>
+            <div style="margin-top: 10px; font-weight: 800; color: var(--green-accent); font-size: 0.9rem;">$VELOX (KASPA)</div>
+        </div>
 
-            <h1>VELOX <span class="highlight">DePIN</span></h1>
-            <p class="hero-desc" id="txt-hero-desc">The first decentralized VPN infrastructure powered by the high-speed Kaspa KRC-20 network. Secure, private, and community-driven.</p>
+        <div class="swap-bridge" style="font-size: 2.5rem; color: var(--green-accent); opacity: 0.8; animation: pulse 2s infinite;">
+            <i class="fas fa-exchange-alt"></i>
+        </div>
 
-            <div class="btn-group">
-                <a href="https://kaspa.com/tokens/marketplace/token/VELOX" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-bolt"></i> <span id="txt-trade">Trade $VELOX</span>
-                </a>
-                <a href="https://t.me/VeloxKRC20" target="_blank" class="btn">
-                    <i class="fab fa-telegram-plane"></i> <span id="txt-community">Community</span>
-                </a>
-                <a href="https://x.com/VELOXDePin" target="_blank" class="btn">
-                    <i class="fab fa-x-twitter"></i> <span id="txt-follow">Follow X</span>
-                </a>
-                <a href="https://drive.google.com/file/d/1msGGmIynzt_061qspn3K7sXuDUhImnlL/view" target="_blank" class="btn">
-                    <i class="fas fa-file-invoice"></i> <span id="txt-whitepaper">Whitepaper</span>
-                </a>
-            </div>
-
-            <a href="https://t.me/VELOKSIK" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="coin-wrapper">
-                    <img src="veloksik-coin.png" alt="Veloksik Meme Coin" class="veloksik-coin">
+        <div class="coin-item" style="text-align: center;">
+            <a href="https://t.me/VELOKSIK" target="_blank" style="text-decoration: none;">
+                <div class="coin-wrapper" style="margin: 0;">
+                    <img src="veloksik-coin.png" alt="Veloksik Meme Coin" class="veloksik-coin" style="filter: drop-shadow(0 0 30px rgba(0, 136, 204, 0.4));">
                 </div>
             </a>
+            <div style="margin-top: 10px; font-weight: 800; color: #0088cc; font-size: 0.9rem;">$VELOKSIK (TON)</div>
+        </div>
+    </div>
 
-            <div class="veloksik-story">
-                <h3 class="highlight" id="txt-story-title">The Legend of VELOKSIK 🏎️</h3>
-                <p style="font-style: italic; opacity: 0.8;" id="txt-story-quote">"While other blocks are only being confirmed, Veloksik is already at the finish line."</p>
-                <div style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="txt-story-body">
-                    Veloksik is the official mascot and meme coin of the VELOX DePIN ecosystem. Born at the junction of lightning-fast Kaspa and TON's flexibility, it symbolizes the future of decentralized data transfer. While VELOX builds the VPN infrastructure, Veloksik unites the community with the energy of speed and freedom.
-                    <br><br>
-                    <b>Status:</b> Charged by Kaspa. Ready to conquer TON. More than a meme — a legend in the making.
-                </div>
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <span style="font-size: 0.8rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 136, 204, 0.3);">#TON_POWER</span>
-                    <span style="font-size: 0.8rem; background: rgba(0, 255, 157, 0.1); color: var(--green-accent); padding: 5px 12px; border-radius: 50px; border: 1px solid rgba(0, 255, 157, 0.3);">#KASPA_SPEED</span>
-                </div>
-            </div>
+    <div class="veloksik-story" style="max-width: 800px;">
+        <h3 class="highlight" id="txt-story-title" style="text-align: center; font-size: 1.8rem; margin-bottom: 25px;">Экосистема VELOX: Манифест Свободы 🏎️</h3>
+        
+        <div class="story-section" style="margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px;">
+            <h4 style="color: var(--green-accent); margin-bottom: 10px;"><i class="fas fa-network-wired"></i> VELOX DePIN (Core)</h4>
+            <p style="font-size: 1rem; line-height: 1.6; color: var(--text-secondary);">
+                Это не просто проект, а реализация идеи свободного интернета в новых мировых реалиях. Мы создаем <b>децентрализованный узел связи</b>, чтобы люди могли пользоваться глобальными ресурсами без посредников, обмана и цензуры. VELOX — это ответ на запреты и блокировки. Мы возвращаем интернет тем, для кого он был создан — пользователям, обеспечивая свободу доступа в любой точке мира.
+            </p>
+        </div>
+
+        <div class="story-section">
+            <h4 style="color: #0088cc; margin-bottom: 10px;"><i class="fas fa-rocket"></i> VELOKSIK (Meme & Community)</h4>
+            <p style="font-style: italic; opacity: 0.8; margin-bottom: 10px;" id="txt-story-quote">"Пока другие блоки только подтверждаются, Велоксик уже на финише."</p>
+            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);" id="txt-story-body">
+                Официальный талисман экосистемы. Рожденный на стыке скорости Kaspa и гибкости TON, он объединяет сообщество. Пока <b>VELOX</b> строит фундаментальную VPN-инфраструктуру, Велоксик заряжает проект энергией, привлекая новых сторонников идеи свободного интернета.
+            </p>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px;">
+            <span style="font-size: 0.8rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; padding: 6px 15px; border-radius: 50px; border: 1px solid rgba(0, 136, 204, 0.3); font-weight: bold;">#TON_POWER</span>
+            <span style="font-size: 0.8rem; background: rgba(0, 255, 157, 0.1); color: var(--green-accent); padding: 6px 15px; border-radius: 50px; border: 1px solid rgba(0, 255, 157, 0.3); font-weight: bold;">#KASPA_SPEED</span>
+            <span style="font-size: 0.8rem; background: rgba(255, 255, 255, 0.05); color: white; padding: 6px 15px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); font-weight: bold;">#INTERNET_FREEDOM</span>
+        </div>
+    </div>
+</div>
 
             <div class="marketing-hub">
                 <div class="partner-badge" id="txt-offer">🔥 LIMITED OFFER</div>
